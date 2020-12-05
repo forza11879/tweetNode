@@ -1,0 +1,29 @@
+{
+  "type": "module",
+  "name": "tweetnode",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forza11879/tweetNode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/forza11879/tweetNode/issues"
+  },
+  "homepage": "https://github.com/forza11879/tweetNode#readme",
+  "dependencies": {
+    "ckey": "^1.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1",
+    "ws": "^7.4.1"
+  }
+}
