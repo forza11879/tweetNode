@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use('/', tweetRoute);
 
-app.locals.searchTerm = '#BoobGifFriday'; //Default search term for twitter stream.
+app.locals.searchTerm = 'realDonaldTrump'; //Default search term for twitter stream.
 app.locals.showRetweets = false; //Default
 
 const port = ck.PORT;

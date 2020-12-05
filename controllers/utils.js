@@ -13,7 +13,6 @@ export const stream = (term, twitterStream, clients) => {
   console.log('Resuming for ' + term);
   twitter.stream('statuses/filter', { track: term }, (stream) => {
     stream.on('data', (tweet) => {
-      // sendMessage(tweet);
       console.log('tweetsJohn: ');
       broadcast(clients, JSON.stringify(tweet));
     });
