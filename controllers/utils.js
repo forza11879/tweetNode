@@ -1,5 +1,5 @@
 import WebSocket from 'ws';
-import Twitter from 'twitter';
+import Twitter from 'twitter-lite';
 import ck from 'ckey';
 
 let twitter = new Twitter({
@@ -9,42 +9,27 @@ let twitter = new Twitter({
   access_token_secret: ck.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
-export const stream = (term, clients) => {
+// const parameters = {
+//   track: term,
+//   // follow: "422297024,873788249839370240",  // @OrchardAI, @tylerbuchea
+//   // locations: "-122.75,36.8,-121.75,37.8",  // Bounding box -	San Francisco
+// };
+
+export const stream = (term, clients, twitterStream) => {
   let stream = twitter.stream('statuses/filter', { track: term });
+
   stream.on('data', function (tweet) {
     console.log('tweetsJohn: ');
-    broadcast(clients, JSON.stringify(tweet));
+    // broadcast(clients, JSON.stringify(tweet));
   });
 
   stream.on('error', function (error) {
-    // throw error;
-    throw new Error('something bad happened');
+    console.log(error);
   });
 
-  // setTimeout(() => {
-  //   console.log('Closing stream...');
-  //   stream.destroy();
-  // }, 1000);
-
-  return stream;
+  twitterStream = stream;
+  return twitterStream;
 };
-
-// export const stream = (term, clients) => {
-//   console.log('Resuming for ' + term);
-//   let emitter = twitter.stream('statuses/filter', { track: term }, (stream) => {
-//     stream.on('data', (tweet) => {
-//       console.log('tweetsJohn: ');
-//       broadcast(clients, JSON.stringify(tweet));
-//     });
-
-//     stream.on('error', (error) => {
-//       console.log(error);
-//     });
-//     console.log('stream:', stream);
-//     return stream;
-//   });
-//   console.log('emitter: ', emitter);
-// };
 
 const broadcast = (clients, message) => {
   // console.log('message: ', message);

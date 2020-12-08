@@ -4,9 +4,12 @@ import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import ck from 'ckey';
+import dotenv from 'dotenv';
 import { getWebSocket } from './utils/websocket.js';
 
 import tweetRoute from './routes/tweet.js';
+
+dotenv.config({ path: './config/dev.env' });
 
 // //////
 const app = express();

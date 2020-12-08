@@ -5,7 +5,7 @@
   "description": "test",
   "main": "app.js",
   "scripts": {
-       "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -20,12 +20,13 @@
   "dependencies": {
     "ckey": "^1.0.2",
     "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
     "pm2": "^4.5.0",
     "twit": "^2.2.11",
-    "twitter": "^1.7.1",
+    "twitter-lite": "^0.14.0",
     "ws": "^7.4.1"
   }
 }
