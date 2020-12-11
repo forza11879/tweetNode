@@ -1,9 +1,11 @@
 import { stream } from './utils.js';
-
+import Twitter from 'twitter-lite';
+import ck from 'ckey';
+const token = ck.TWITTER_BEARER_TOKEN;
 let twitterStream;
 
 // Start streaming tweets
-export const getTweet = (req, res) => {
+export const getTweet = async (req, res) => {
   console.log('controller start tweet');
   twitterStream = stream(
     req.app.locals.searchTerm,
