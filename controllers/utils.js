@@ -2,7 +2,7 @@ import WebSocket from 'ws';
 import Twitter from 'twitter-lite';
 import ck from 'ckey';
 
-export const stream = (term, clients, twitterStream) => {
+export const stream = (term) => {
   const twitter = new Twitter({
     // subdomain: 'api', // "api" is the default (change for other subdomains)
     // version: '1.1', // version "1.1" is the default (change for other subdomains)
@@ -16,20 +16,10 @@ export const stream = (term, clients, twitterStream) => {
 
   let stream = twitter.stream('statuses/filter', { track: term });
 
-  stream.on('data', function (tweet) {
-    console.log('tweetsJohn: ');
-    broadcast(clients, JSON.stringify(tweet));
-  });
-
-  stream.on('error', function (error) {
-    console.log(error);
-  });
-
-  twitterStream = stream;
-  return twitterStream;
+  return stream;
 };
 
-const broadcast = (clients, message) => {
+export const broadcast = (clients, message) => {
   clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(message);
