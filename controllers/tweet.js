@@ -1,4 +1,4 @@
-import { stream, broadcast } from './utils.js';
+import { stream } from './utils.js';
 
 let twitterStream;
 
@@ -6,27 +6,20 @@ let twitterStream;
 export const setSearchTerm = async (req, res) => {
   try {
     const { term } = req.params;
+    const { clients } = req.app.locals;
+
     console.log('setSearchTerm');
     console.log('term: ', term);
+
     if (twitterStream) {
       console.log('getTweetPause');
       twitterStream.destroy();
     }
 
-    const currentStream = stream(term);
+    const { currentStream, streamResult } = stream(clients, term);
     twitterStream = currentStream;
 
-    await new Promise((resolve, reject) => {
-      currentStream.on('data', function (tweet) {
-        console.log('tweets: ');
-        broadcast(req.app.locals.clients, JSON.stringify(tweet));
-        resolve(tweet);
-      });
-
-      currentStream.on('error', function (error) {
-        reject(error);
-      });
-    });
+    await streamResult;
 
     res.status(200).json({ message: 'Successful HTTP request' });
   } catch (error) {
